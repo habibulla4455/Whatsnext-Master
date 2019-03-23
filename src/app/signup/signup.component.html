@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h1 class="text-center"> WhatsNext </h1>
+          <h5 class="card-title text-center">Sign up</h5>
+          <hr>
+          <form class="form-signin" #f="ngForm" (submit)="signup(f)">
+            <div class="form-label-group">
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter fullname" name="name"
+                [(ngModel)]="user.name" autofocus>
+            </div><br>
+            <div class="form-label-group">
+              <input type="email" #uemail="ngModel" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                name="email" class="form-control" placeholder="name@example.com" [(ngModel)]="user.email" email
+                required>
+              <small class="text-red" *ngIf="uemail.errors && uemail.errors.pattern && uemail.touched"> Enter valid
+                email! </small>
+            </div><br>
+            <div class="form-label-group">
+              <input type="date" name="udob" class="form-control" [(ngModel)]="user.birthDate" required>
+            </div><br>
+            <div class="form-label-group">
+              <input type="password" #upass="ngModel" class="form-control" id="exampleInputPassword1" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                placeholder="Enter password" name="paswd" [(ngModel)]="user.password" required>
+              <small class="text-red" *ngIf="upass.errors && upass.errors.pattern && upass.touched"> Enter valid
+                Password </small>
+            </div>
+            <div class="form-label-group">
+              <input type="password" #cpass="ngModel" class="form-control" placeholder="Reneter Password" name="cfmpas"
+                [(ngModel)]="cfmpas" [disabled]="upass.invalid" required>
+              <div class="alert alert-danger" *ngIf="user.password !== cfmpas && cpass.touched"> <small> Password not
+                  matched! </small> </div>
+            </div><br>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign up</button>
+            <small>
+              Already a user <a [routerLink]="['/login']"> login </a> here.
+            </small>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

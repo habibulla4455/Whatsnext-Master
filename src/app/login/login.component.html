@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h1 class="text-center"> WhatsNext </h1>
+          <h5 class="card-title text-center">Log In</h5>
+          <hr>
+          <form #f="ngForm" (submit)="login(f)">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Email address</label>
+              <input type="email" #uemail="ngModel" class="form-control" id="exampleFormControlInput1" [ngClass]="{'is-valid': uemail.valid }"
+                pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                placeholder="name@example.com" name="email" [(ngModel)]="user.email" email required>
+              <small class="text-red" *ngIf="uemail.errors && uemail.errors.pattern && uemail.touched"> Enter valid
+                email! </small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" #upass="ngModel" class="form-control" id="exampleInputPassword1"
+                placeholder="Enter password" [(ngModel)]="user.password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button><br>
+            <div class="alert alert-danger" *ngIf="noAccount"> <small> No account found! </small> </div>
+            <div class="alert alert-danger" *ngIf="invalidPass"> <small> Invalid Password! </small> </div>
+            <small> Not a user? <a [routerLink]="['/signup']"> Signup </a> now.</small>
+            <!-- <hr> -->
+            <!-- <button class="btn w-100 text-white"> Forgot Password </button> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

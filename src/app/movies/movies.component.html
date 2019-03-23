@@ -1,0 +1,39 @@
+<app-header> </app-header>
+<div class="container">
+  <div class="loader" *ngIf="showLoader">
+    <div class="spinner"></div>
+  </div>
+  <div class="card mb-3 mt-4" style="max-width: 900px;" *ngIf="!showLoader">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img [src]="movieData.Poster" class="card-img" height="100%" onError="this.src='assets/placeholder_movie.png';">
+      </div>
+      <div class="col-md-8">
+        <div class="card-header">
+          <strong>{{movieData.Title}}({{movieData.Year}})</strong>
+          <p> {{movieData.Genre}} </p>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{movieData.Plot}}</p>
+          <p class="card-text"><b>Released date</b>: {{movieData.Released}}</p>
+          <p class="card-text"><b>Directors</b>: {{movieData.Director}}</p>
+          <p class="card-text"><b>Writers</b>: {{movieData.Writer}}</p>
+          <p class="card-text"><b>Starring</b>: {{movieData.Actors}}</p>
+          <p class="card-text"><b>Production</b>: {{movieData.Production}}</p>
+          <p class="card-text"><b>Language</b> : {{movieData.Language}}({{movieData.Country}}) </p>
+          <p class="card-text">
+            <strong> IMDb Rating : {{movieData.imdbRating}}</strong><br>
+            <ngb-rating [(rate)]="currentData" max="5">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+              </ng-template>
+            </ngb-rating><br>
+            Your Rating: <b>{{currentData}}</b>
+          </p>
+          <button class="btn btn-primary" (click)="submitRating(rateIndex)"> Submit Rating </button> 
+          <a href="https://www.imdb.com/title/{{movieData.imdbID}}" class="btn btn-primary ml-2" target="_blank"> Visit IMDb </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<app-header> </app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <input class="form-control mt-4" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="movieName">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary mt-4" (click)="getMoviesByName()"> Search </button>
+    </div>
+  </div>
+  <hr>
+  <div class="loader" *ngIf="showLoader">
+    <div class="spinner"></div>
+  </div>
+  <div class="row d-flex">
+    <div id="nodata" class="p-5">
+      <h1 class="display-4">Search Movie</h1>
+      <p class="lead"> For recommandation, we need you to rate the movie. and we'll let you know which one is the best
+        for you. </p>
+    </div>
+    <div class="col-md-4 mt-4" *ngFor="let movie of movieData; let i = index;">
+      <div class="card" style="width: 18rem;">
+        <img [src]="movie.Poster" class="card-img-top" alt="" onError="this.src='assets/placeholder_movie.png';">
+        <div class="card-body">
+          <h5 class="card-title">{{movie.Title}}</h5>
+          <small> {{movie.Type | uppercase }} </small>
+          <p class="card-text"> Year: {{movie.Year}} </p>
+          <a href="#" class="btn btn-primary" [routerLink]="['/movies/'+movie.Title]"> Ratings </a>
+          <a href="#" class="btn btn-primary ml-2" [routerLink]="['/recom/'+movie.Title+' ('+movie.Year+')']"> Whatsnext </a>
+        </div>
+      </div>
+    </div>
+    <div class="error p-5" *ngIf="noDataError">
+      <h1 class="display-4"> No Movies Found! </h1>
+    </div>
+  </div>
+</div>
